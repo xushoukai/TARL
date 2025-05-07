@@ -1,0 +1,12 @@
+{
+    "Token": "VsSdKg8LRKy2LOiCL3436A",
+    "business_flag": "AILab_MLC_QY",
+    "model_local_file_path": "/apdcephfs/share_1594716/zihaolian/code/transfer_rl/OfflineRL-Kit",
+    "host_num": 1,
+    "host_gpu_num": 1,
+    "GPUName": "A100",
+    "cuda_version": "11.0",
+    "image_full_name": "mirrors.tencent.com/zihaolian/d4rl:v1",
+    "readable_name": "train_AILab_MLC_QY_Offline_kit",
+    "task_flag": "train_AILab_MLC_QY_Offline_kit"
+}

@@ -1,0 +1,3 @@
+adapted_norm_ep_rew_mean: 41.42, adapted_norm_ep_rew_std: 20.60
+adapted_norm_ep_rew_mean: 41.94, adapted_norm_ep_rew_std: 20.55
+adapted_norm_ep_rew_mean: 37.08, adapted_norm_ep_rew_std: 21.07

@@ -1,0 +1,23 @@
+norm_ep_rew_mean: 78.43, norm_ep_rew_std: 3.03
+norm_ep_rew_mean: 78.66, norm_ep_rew_std: 2.87
+norm_ep_rew_mean: 78.79, norm_ep_rew_std: 3.05
+norm_ep_rew_mean: 78.83, norm_ep_rew_std: 2.86
+norm_ep_rew_mean: 78.75, norm_ep_rew_std: 3.33
+norm_ep_rew_mean: 78.71, norm_ep_rew_std: 2.96
+norm_ep_rew_mean: 78.39, norm_ep_rew_std: 2.87
+norm_ep_rew_mean: 78.64, norm_ep_rew_std: 3.34
+norm_ep_rew_mean: 78.87, norm_ep_rew_std: 2.96
+norm_ep_rew_mean: 78.61, norm_ep_rew_std: 3.04
+10 evaluate result is as follows: average_norm_ep_rew_mean: 78.67, std_norm_ep_rew: 0.15
+adapted_norm_ep_rew_mean: 78.19, adapted_norm_ep_rew_std: 3.78
+adapted_norm_ep_rew_mean: 78.47, adapted_norm_ep_rew_std: 2.98
+adapted_norm_ep_rew_mean: 79.00, adapted_norm_ep_rew_std: 3.07
+adapted_norm_ep_rew_mean: 78.59, adapted_norm_ep_rew_std: 3.32
+adapted_norm_ep_rew_mean: 78.75, adapted_norm_ep_rew_std: 3.00
+adapted_norm_ep_rew_mean: 78.29, adapted_norm_ep_rew_std: 3.06
+adapted_norm_ep_rew_mean: 78.46, adapted_norm_ep_rew_std: 3.06
+adapted_norm_ep_rew_mean: 78.61, adapted_norm_ep_rew_std: 2.70
+adapted_norm_ep_rew_mean: 78.94, adapted_norm_ep_rew_std: 2.96
+adapted_norm_ep_rew_mean: 78.74, adapted_norm_ep_rew_std: 2.91
+10 evaluate result is as follows: average_norm_ep_rew_mean: 78.60, std_norm_ep_rew: 0.25
+total time: 2917.26s
