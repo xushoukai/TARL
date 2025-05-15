@@ -97,28 +97,28 @@ last_10_performance: 81.98
 ## Directory Structure
 ```
 ├── TRANSFER_RL-MAIN/
-│   ├── CQL/
-│   │   ├── atari/
-│   │   ├── dopamine/
-│   │   ├── online/
-│   │   ├── CONTRIBUTING.md
-│   │   ├── LICENSE
-│   │   ├── process_result.py
-│   │   ├── run_atari.sh							      # Discrete-environment testing script
-│   │   └── run_result.py
+│ ├── CQL/
+│ │ ├── atari/
+│ │ ├── dopamine/
+│ │ ├── online/
+│ │ ├── CONTRIBUTING.md
+│ │ ├── LICENSE
+│ │ ├── process_result.py
+│ │ ├── run_atari.sh # Discrete-environment testing script
+│ │ └── run_result.py
 ├── OfflineRL-Kit/
-│   ├── run_example/								      # our project modifications
-│   │   ├── plotter.py
-│   │   ├── run_cql.py
-│   │   ├── run_cql_ln_before_activation.py  		      # Implementation of  CQL modification
-│   │   └── run_eval_cql_ln_before_activation.py	      # Evaluation code 
-│   ├── scripts/
-│   │   └── run_walker2d-full-replay.sh				      # Experiment script 
-│   ├── tune_example/
-│   ├── LICENSE
-│   ├── offlinerl_config.json
-│   ├── README.md
-│   └── setup.py
+│ ├── run_example/ # Our project modifications
+│ │ ├── plotter.py
+│ │ ├── run_cql.py
+│ │ ├── run_cql_ln_before_activation.py # Implementation of CQL modification
+│ │ └── run_eval_cql_ln_before_activation.py # Evaluation code
+│ ├── scripts/
+│ │ └── run_walker2d-full-replay.sh # Experiment script
+│ ├── tune_example/
+│ ├── LICENSE
+│ ├── offlinerl_config.json
+│ ├── README.md
+│ └── setup.py
 ├── .gitignore
 └── requirements.txt
 
