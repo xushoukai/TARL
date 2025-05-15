@@ -2,7 +2,7 @@ import argparse
 import random
 
 import gym
-# import d4rl
+import d4rl
 
 import numpy as np
 import torch
@@ -12,6 +12,7 @@ sys.path.append("/lichenghao/lch/transfer_rl-main/OfflineRL-Kit")
 from offlinerlkit.nets import MLP_LN_Before_Activation, MLP_LN_Before_Activation_No_Dropout
 from offlinerlkit.modules import ActorProb, Critic, TanhDiagGaussian
 from offlinerlkit.utils.load_dataset import qlearning_dataset
+# import d4rl
 from offlinerlkit.buffer import ReplayBuffer
 from offlinerlkit.utils.logger import Logger, make_log_dirs
 from offlinerlkit.policy_trainer import TTAMFPolicyTrainer
@@ -22,14 +23,16 @@ from offlinerlkit.policy import CQLTTAPolicy
 suggested hypers
 cql-weight=5.0, temperature=1.0 for all D4RL-Gym tasks
 """
-
+# from loguru import logger
+# logger.remove()
+# logger.add(sys.stderr, level="WARNING")
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--algo-name", type=str, default="cql_ln_before_activation_best")
-    parser.add_argument("--task", type=str, default="hopper-medium-v2")
+    parser.add_argument("--algo-name", type=str, default="eval_cql_ln_before_activation_best_debug")
+    parser.add_argument("--task", type=str, default="antmaze-medium-diverse-v0")
     parser.add_argument("--seed", type=int, default=0)
-    parser.add_argument("--checkpoints", type=str, default="/mnt/cephfs/home/lianzihao/code/transfer_rl/OfflineRL-Kit/log/walker2d-medium-replay-v2/mcq_ln_before_activation_best/seed_0&timestamp_23-0623-103011/checkpoint/best_policy.pth")
+    parser.add_argument("--checkpoints", type=str, default="/lichenghao/lch/transfer_rl-main/OfflineRL-Kit/log/antmaze-medium-diverse-v0/cql_ln_before_activation_best/seed_0&timestamp_25-0330-120959/checkpoint/best_policy.pth")
     parser.add_argument("--hidden-dims", type=int, nargs='*', default=[256, 256, 256])
     parser.add_argument("--actor-lr", type=float, default=1e-4)
     parser.add_argument("--tta-actor-lr", type=float, default=1e-4)
@@ -58,6 +61,8 @@ def get_args():
     parser.add_argument("--device", type=str, default="cuda" if torch.cuda.is_available() else "cpu")
     parser.add_argument("--only-eval-tta", type=bool, default=False)
     parser.add_argument("--weight-sample", type=bool, default=False)
+    parser.add_argument("--is_entropy_filter", type=bool, default=False)
+    parser.add_argument("--entropy_threshold", type=float, default=0.1)
 
     return parser.parse_args()
 
@@ -65,7 +70,7 @@ def get_args():
 def evaluate(args=get_args()):
     # create env and dataset
     env = gym.make(args.task)
-    dataset = qlearning_dataset(env)
+    dataset = d4rl.qlearning_dataset(env)
     print(len(dataset["observations"]))
     # print((dataset["actions"]).shape())
     # print((dataset["next_observations"]).shape())
@@ -73,7 +78,7 @@ def evaluate(args=get_args()):
     # print((dataset["terminals"]).shape())
     # See https://github.com/aviralkumar2907/CQL/blob/master/d4rl/examples/cql_antmaze_new.py#L22
     if 'antmaze' in args.task:
-        dataset.rewards = (dataset.rewards - 0.5) * 4.0
+        dataset["rewards"] = (dataset["rewards"] - 0.5) * 4.0
     args.obs_shape = env.observation_space.shape
     args.action_dim = np.prod(env.action_space.shape)
     args.max_action = env.action_space.high[0]
@@ -188,7 +193,7 @@ def evaluate(args=get_args()):
     )
 
     # train
-    policy_trainer.evaluate(args.seed, args.only_eval_tta, args.weight_sample)
+    policy_trainer.evaluate(args.seed, args.only_eval_tta, args.weight_sample, val_epoch=10, entropy_threshold=args.entropy_threshold, is_entropy_filter=args.is_entropy_filter)
 
 
 if __name__ == "__main__":

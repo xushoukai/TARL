@@ -1,2 +1,0 @@
-adapted_norm_ep_rew_mean: 13.12, adapted_norm_ep_rew_std: 13.58
-adapted_norm_ep_rew_mean: 10.65, adapted_norm_ep_rew_std: 11.58

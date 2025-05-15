@@ -9,7 +9,7 @@ import torch
 
 import sys 
 sys.path.append("/mnt/cephfs/home/lianzihao/code/transfer_rl/OfflineRL-Kit") 
-
+from loguru import logger
 from offlinerlkit.nets import MLP_LN_Before_Activation
 from offlinerlkit.modules import ActorProb, Critic, TanhDiagGaussian
 from offlinerlkit.utils.load_dataset import qlearning_dataset
@@ -17,7 +17,6 @@ from offlinerlkit.buffer import ReplayBuffer
 from offlinerlkit.utils.logger import Logger, make_log_dirs
 from offlinerlkit.policy_trainer import MFPolicyTrainer
 from offlinerlkit.policy import CQLPolicy
-
 
 """
 suggested hypers
@@ -61,15 +60,14 @@ def get_args():
 def train(args=get_args()):
     # create env and dataset
     env = gym.make(args.task)
-    dataset = qlearning_dataset(env)
-    print(len(dataset["observations"]))
+    dataset = d4rl.qlearning_dataset(env)
     # print((dataset["actions"]).shape())
     # print((dataset["next_observations"]).shape())
     # print((dataset["rewards"]).shape())
     # print((dataset["terminals"]).shape())
     # See https://github.com/aviralkumar2907/CQL/blob/master/d4rl/examples/cql_antmaze_new.py#L22
     if 'antmaze' in args.task:
-        dataset.rewards = (dataset.rewards - 0.5) * 4.0
+        dataset["rewards"] = (dataset["rewards"] - 0.5) * 4.0
     args.obs_shape = env.observation_space.shape
     args.action_dim = np.prod(env.action_space.shape)
     args.max_action = env.action_space.high[0]
@@ -161,12 +159,11 @@ def train(args=get_args()):
         eval_env=env,
         buffer=buffer,
         logger=logger,
-        epoch=args.epoch,
+        epoch=1000,
         step_per_epoch=args.step_per_epoch,
         batch_size=args.batch_size,
         eval_episodes=args.eval_episodes
     )
-
     # train
     policy_trainer.train()
 
